@@ -1,4 +1,4 @@
-package com.wecare.iam.dto;
+package com.wecare.coachservice.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +9,7 @@ import lombok.ToString;
 @ToString
 public class CoachDTO extends BaseEntityDTO{
 
-    private String speciality;
+
+      private String speciality;
+
 }
