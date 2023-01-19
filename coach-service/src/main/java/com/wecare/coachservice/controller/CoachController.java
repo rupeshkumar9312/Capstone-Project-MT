@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/coaches")
-public class CoachController implements CoachClient {
+public class CoachController {
 
     @Autowired
     private CoachService coachService;
