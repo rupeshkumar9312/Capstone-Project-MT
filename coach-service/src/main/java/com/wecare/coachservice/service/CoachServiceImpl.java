@@ -1,8 +1,8 @@
 package com.wecare.coachservice.service;
 
-import com.wecare.iam.domain.Coach;
-import com.wecare.iam.dto.CoachDTO;
-import com.wecare.iam.repository.CoachRepository;
+import com.wecare.coachservice.domain.Coach;
+import com.wecare.coachservice.dto.CoachDTO;
+import com.wecare.coachservice.repository.CoachRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
