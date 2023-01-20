@@ -1,7 +1,9 @@
 package com.wecare.appointmentservice.service;
 
+import com.wecare.appointmentservice.client.CoachClient;
 import com.wecare.appointmentservice.domain.Appointment;
 import com.wecare.appointmentservice.dto.AppointmentDTO;
+import com.wecare.appointmentservice.dto.CoachDTO;
 import com.wecare.appointmentservice.repository.AppointmentRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+
+    @Autowired
+    private CoachClient coachClient;
 
     @Override
     public AppointmentDTO createAppointment(AppointmentDTO appointmentDTO) {
@@ -35,9 +40,15 @@ public class AppointmentServiceImpl implements AppointmentService{
     public List<AppointmentDTO> getAppointmentByUserId(String userId) {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
         List<Appointment> appointments = appointmentRepository.findByUserId(userId);
+
+
         return appointments.stream().map(appointment -> {
-            BeanUtils.copyProperties(appointment,appointmentDTO);
+            CoachDTO coachDTO = coachClient.getCoach(appointment.getCoachId());
+            BeanUtils.copyProperties(appointment, appointmentDTO);
+            appointmentDTO.setCoach(coachDTO);
             return appointmentDTO;
-        }).collect(Collectors.toList());
+        }).toList();
+
+
     }
 }

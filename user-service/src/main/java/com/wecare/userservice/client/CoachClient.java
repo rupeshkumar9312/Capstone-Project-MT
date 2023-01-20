@@ -1,8 +1,10 @@
-package com.wecare.coachservice.client;
+package com.wecare.userservice.client;
 
-import com.wecare.coachservice.dto.CoachDTO;
+import com.wecare.userservice.dto.CoachDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
@@ -14,8 +16,5 @@ public interface CoachClient {
 
     @GetMapping("/api/coaches")
     public String get();
-
-    @GetMapping("/api/coaches/{coachId}")
-    public CoachDTO getCoach(@PathVariable String coachId);
 
 }

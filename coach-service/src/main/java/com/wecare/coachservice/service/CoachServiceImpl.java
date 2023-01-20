@@ -21,4 +21,12 @@ public class CoachServiceImpl implements CoachService {
         BeanUtils.copyProperties(savedCoach, coachDTO);
         return coachDTO;
     }
+
+    @Override
+    public CoachDTO findCoachById(String coachId) {
+        CoachDTO coachDTO = new CoachDTO();
+        Coach coach= coachRepository.findById(coachId).orElse(new Coach());
+        BeanUtils.copyProperties(coach,coachDTO);
+        return coachDTO;
+    }
 }

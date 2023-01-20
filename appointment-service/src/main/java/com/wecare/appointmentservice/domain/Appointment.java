@@ -16,8 +16,7 @@ public class Appointment {
     @Id
     private String id;
     private String userId;
-    @DocumentReference
-    private Coach coach;
+    private String coachId;
     private String date;
     private String slot;
 }

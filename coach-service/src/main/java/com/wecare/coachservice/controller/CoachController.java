@@ -24,4 +24,9 @@ public class CoachController {
     public String get() {
         return "Get Mapping";
     }
+
+    @GetMapping("/{coachId}")
+    public CoachDTO getCoach(@PathVariable String coachId){
+        return coachService.findCoachById(coachId);
+    }
 }
