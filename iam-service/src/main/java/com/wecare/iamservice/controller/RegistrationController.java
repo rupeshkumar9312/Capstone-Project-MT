@@ -36,6 +36,11 @@ public class RegistrationController implements UserClient,CoachClient{
     }
 
     @Override
+    public Optional<CoachDTO> validateCoach(LoginRequest loginRequest) {
+        return Optional.empty();
+    }
+
+    @Override
     @PostMapping("/users")
     public UserDTO create(UserDTO userDTO) {
         return userClient.create(userDTO);

@@ -4,6 +4,7 @@ import com.wecare.iamservice.client.CoachClient;
 import com.wecare.iamservice.client.UserClient;
 import com.wecare.iamservice.domain.Coach;
 import com.wecare.iamservice.domain.User;
+import com.wecare.iamservice.dto.CoachDTO;
 import com.wecare.iamservice.dto.UserDTO;
 import com.wecare.iamservice.repository.CoachRepository;
 import com.wecare.iamservice.repository.UserRepository;
@@ -12,6 +13,7 @@ import com.wecare.iamservice.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -42,8 +44,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 }
                 break;
             case COACH:
-                Coach coach = coachRepository.findByMobileAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
-                if (null != coach) {
+                Optional<CoachDTO> coach = coachClient.validateCoach(loginRequest);
+                if (coach.isPresent()) {
                     loginResponse.setIsAuthenticated(true);
                 } else {
                     loginResponse.setIsAuthenticated(false);
