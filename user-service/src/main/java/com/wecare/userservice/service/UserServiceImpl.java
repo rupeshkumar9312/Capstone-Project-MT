@@ -7,6 +7,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -30,5 +32,16 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(dbUser, userDTO);
         return userDTO;
+    }
+
+    @Override
+    public Optional<UserDTO> validateCredentials(String mobile, String password) {
+        UserDTO userDTO = new UserDTO();
+        Optional<User> user = userRepository.findByMobileAndPassword(mobile,password);
+        if(user.isPresent()){
+            BeanUtils.copyProperties(user,userDTO);
+            return Optional.of(userDTO);
+        }
+        return Optional.empty();
     }
 }

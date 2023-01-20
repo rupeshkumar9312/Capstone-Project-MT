@@ -4,12 +4,14 @@ import com.wecare.iamservice.client.CoachClient;
 import com.wecare.iamservice.client.UserClient;
 import com.wecare.iamservice.dto.CoachDTO;
 import com.wecare.iamservice.dto.UserDTO;
+import com.wecare.iamservice.response.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/registration")
@@ -43,5 +45,10 @@ public class RegistrationController implements UserClient,CoachClient{
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUser(String userId) {
         return userClient.getUser(userId);
+    }
+
+    @Override
+    public ResponseEntity<Optional<UserDTO>> validateCredentials(LoginRequest loginRequest) {
+        return null;
     }
 }

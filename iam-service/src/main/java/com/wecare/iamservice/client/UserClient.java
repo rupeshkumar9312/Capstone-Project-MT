@@ -1,6 +1,7 @@
 package com.wecare.iamservice.client;
 
 import com.wecare.iamservice.dto.UserDTO;
+import com.wecare.iamservice.response.LoginRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @FeignClient(name = "user-service", path = "/api/users")
 public interface UserClient {
@@ -18,4 +20,7 @@ public interface UserClient {
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String userId);
+    @PostMapping("/validate")
+    public ResponseEntity<Optional<UserDTO>> validateCredentials(@RequestBody LoginRequest loginRequest);
+
 }
