@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/registration")
+@CrossOrigin("http://localhost:3000")
 public class RegistrationController implements UserClient,CoachClient{
 
 

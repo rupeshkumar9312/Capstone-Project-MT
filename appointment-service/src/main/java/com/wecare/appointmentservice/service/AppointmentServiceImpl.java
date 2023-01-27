@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
@@ -39,15 +38,17 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public List<AppointmentDTO> getAppointmentByUserId(String userId) {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
-        List<Appointment> appointments = appointmentRepository.findByUserId(userId);
+        List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
 
 
-        return appointments.stream().map(appointment -> {
+        var list =  appointments.stream().map(appointment -> {
             CoachDTO coachDTO = coachClient.getCoach(appointment.getCoachId());
             BeanUtils.copyProperties(appointment, appointmentDTO);
             appointmentDTO.setCoach(coachDTO);
             return appointmentDTO;
         }).toList();
+
+        return list;
 
 
     }
