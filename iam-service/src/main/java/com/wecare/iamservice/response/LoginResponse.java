@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class LoginResponse {
     private Boolean isAuthenticated;
+    private String accessToken;
 }

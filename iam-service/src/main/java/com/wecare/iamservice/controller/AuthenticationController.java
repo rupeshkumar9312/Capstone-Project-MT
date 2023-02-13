@@ -21,4 +21,9 @@ public class AuthenticationController {
         LoginResponse loginResponse = authenticationService.authenticate(loginRequest);
         return new ResponseEntity<>(loginResponse, HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/test")
+    public String check(){
+        return "success";
+    }
 }

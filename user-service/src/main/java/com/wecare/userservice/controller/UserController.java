@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public UserDTO create(@RequestBody @Valid UserDTO userDTO) {
+    public UserDTO create(@RequestHeader("x-auth") @RequestBody @Valid UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 

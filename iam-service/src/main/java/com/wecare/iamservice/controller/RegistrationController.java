@@ -43,7 +43,7 @@ public class RegistrationController implements UserClient,CoachClient{
 
     @Override
     @PostMapping("/users")
-    public UserDTO create(UserDTO userDTO) {
+    public UserDTO create(@RequestHeader(value = "Authorization", required = true) @RequestBody UserDTO userDTO) {
         return userClient.create(userDTO);
     }
 

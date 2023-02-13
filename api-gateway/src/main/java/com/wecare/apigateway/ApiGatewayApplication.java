@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -25,6 +26,8 @@ public class ApiGatewayApplication {
 //	public Map<String, Object> get(@RequestBody Map<String,Object> req){
 //		return req;
 //	}
+
+
 	@Bean
 	public WebFluxConfigurer corsMappingConfiguration(){
 		return new WebFluxConfigurer() {
