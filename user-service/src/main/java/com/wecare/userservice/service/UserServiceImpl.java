@@ -39,7 +39,8 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         Optional<User> user = userRepository.findByMobileAndPassword(mobile,password);
         if(user.isPresent()){
-            BeanUtils.copyProperties(user,userDTO);
+//            BeanUtils.copyProperties(user,userDTO);
+            userDTO.setId(user.get().getId());
             return Optional.of(userDTO);
         }
         return Optional.empty();

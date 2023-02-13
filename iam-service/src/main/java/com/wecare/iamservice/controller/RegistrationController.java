@@ -1,5 +1,6 @@
 package com.wecare.iamservice.controller;
 
+import com.wecare.iamservice.Authorised;
 import com.wecare.iamservice.client.CoachClient;
 import com.wecare.iamservice.client.UserClient;
 import com.wecare.iamservice.dto.CoachDTO;
@@ -43,14 +44,15 @@ public class RegistrationController implements UserClient,CoachClient{
 
     @Override
     @PostMapping("/users")
-    public UserDTO create(@RequestHeader(value = "Authorization", required = true) @RequestBody UserDTO userDTO) {
+    public UserDTO create(@RequestBody UserDTO userDTO) {
         return userClient.create(userDTO);
     }
 
     @Override
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDTO> getUser(String userId) {
-        return userClient.getUser(userId);
+    @Authorised(roles = "user",selfCheck = true)
+    public ResponseEntity<UserDTO> getUser(@RequestHeader(value = "Authorization") String authorization, String userId) {
+        return userClient.getUser(authorization,userId);
     }
 
     @Override

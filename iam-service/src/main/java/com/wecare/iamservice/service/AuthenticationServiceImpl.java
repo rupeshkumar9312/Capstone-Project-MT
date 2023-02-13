@@ -62,7 +62,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                             .withIssuer("we-care-iam")
                             .withIssuedAt(Date.from(Instant.now()))
                             .withExpiresAt(Date.from(Instant.now().plus(30,ChronoUnit.MINUTES)))
-                            .withClaim("role","COACH")
+                            .withClaim("role","USER")
                             .withClaim("id",user.get().getId())
                             .sign(Algorithm.HMAC256("secret"))
                             ;

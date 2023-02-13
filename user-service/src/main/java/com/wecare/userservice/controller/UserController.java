@@ -2,6 +2,7 @@ package com.wecare.userservice.controller;
 
 import com.wecare.userservice.dto.UserDTO;
 import com.wecare.userservice.request.LoginRequest;
+import com.wecare.userservice.security.Authorised;
 import com.wecare.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public UserDTO create(@RequestHeader("x-auth") @RequestBody @Valid UserDTO userDTO) {
+    public UserDTO create(@RequestBody @Valid UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable String userId) {
+    @Authorised(roles = "USER", selfCheck = true)
+    public ResponseEntity<UserDTO> getUser(@RequestHeader(value = "Authorization") String authorization,@PathVariable String userId) {
         UserDTO response = userService.getUserById(userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

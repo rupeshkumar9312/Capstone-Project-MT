@@ -1,5 +1,6 @@
 package com.wecare.iamservice.controller;
 
+import com.wecare.iamservice.Authorised;
 import com.wecare.iamservice.response.LoginRequest;
 import com.wecare.iamservice.response.LoginResponse;
 import com.wecare.iamservice.service.AuthenticationService;
@@ -22,8 +23,9 @@ public class AuthenticationController {
         return new ResponseEntity<>(loginResponse, HttpStatus.ACCEPTED);
     }
 
+    @Authorised(roles = "COACH")
     @GetMapping("/test")
-    public String check(){
+    public String check(@RequestHeader(value = "Authorization") String authorization){
         return "success";
     }
 }
