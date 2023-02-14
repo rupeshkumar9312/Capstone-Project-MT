@@ -1,6 +1,6 @@
 package com.wecare.iamservice;
 
-import com.auth0.jwt.interfaces.Claim;
+import com.wecare.iamservice.exception.AuthenticationException;
 import com.wecare.iamservice.util.JwtUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Map;
 
 @Aspect
 @Component
@@ -35,11 +33,11 @@ public class AuthorizeUserAspect {
             Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
             String id  = method.getDeclaredAnnotation(PathVariable.class).value();
             if(!id.equalsIgnoreCase(userId)){
-                throw new RuntimeException("Unauthorised");
+                throw new AuthenticationException("Unauthorised");
             }
         }
         if(!delegate.roles().equalsIgnoreCase(role)){
-            throw new RuntimeException("Unauthorized");
+            throw new AuthenticationException("Unauthorized");
         }
 //        Object obj = joinPoint.getThis(); // get the object
 //        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod(); // get the origin method

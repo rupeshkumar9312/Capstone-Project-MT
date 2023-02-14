@@ -50,13 +50,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     HashMap<String,Object> claims = new HashMap<>();
                     claims.put("userId",user.get().getId());
                     claims.put("role","USER");
-//                    String token = Jwts.builder()
-//                            .setSubject(user.get().getId())
-//                            .setExpiration(Date.from(Instant.now().plus(30,ChronoUnit.MINUTES)))
-//                            .signWith(SignatureAlgorithm.HS512,"fdjhh3gh12jhgjghfgdfgcfhgyjgj38".getBytes())
-//                            .setClaims(claims)
-//                            .setIssuedAt(Date.from(Instant.now()))
-//                            .compact();
                     String token = JWT.create()
                             .withHeader(claims)
                             .withIssuer("we-care-iam")
